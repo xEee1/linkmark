@@ -1,0 +1,276 @@
+:root {
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --border: #e2e5ea;
+  --text: #1f2328;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --danger: #dc2626;
+  --danger-bg: #fef2f2;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+a {
+  color: var(--primary);
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+input,
+textarea,
+select {
+  font: inherit;
+}
+.muted {
+  color: var(--muted);
+}
+
+/* Auth pages */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+}
+.auth-card h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.auth-card .muted {
+  margin: 0 0 20px;
+}
+.auth-card label,
+.bookmark-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+.auth-card input,
+.bookmark-form input,
+.bookmark-form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+}
+.auth-card button[type='submit'],
+.btn-primary {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+.auth-card button[type='submit'] {
+  width: 100%;
+}
+.auth-card button[type='submit']:hover,
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.alert {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 9px 11px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+/* App shell */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--primary);
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.btn-ghost {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+}
+.btn-ghost:hover {
+  background: #f0f2f5;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.toolbar .search {
+  flex: 1 1 260px;
+}
+.toolbar input,
+.toolbar select {
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.bookmark-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.bookmark-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.bookmark-main {
+  min-width: 0;
+  flex: 1;
+}
+.bookmark-title {
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-all;
+}
+.bookmark-title:hover {
+  text-decoration: underline;
+}
+.bookmark-url {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  word-break: break-all;
+  margin-top: 2px;
+}
+.bookmark-desc {
+  margin: 8px 0 0;
+  color: #374151;
+}
+.bookmark-tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag-chip {
+  border: none;
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.tag-chip:hover {
+  background: #e0e7ff;
+}
+.bookmark-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.btn-danger {
+  padding: 7px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+.btn-danger:hover {
+  background: #fee2e2;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 60px 16px;
+  overflow: auto;
+}
+.modal {
+  width: 100%;
+  max-width: 520px;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+.modal h2 {
+  margin: 0 0 18px;
+  font-size: 18px;
+}
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+.form-actions .btn-primary {
+  flex: 1;
+}

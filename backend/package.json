@@ -2,23 +2,23 @@
   "name": "linkmark-backend",
   "version": "1.0.0",
   "private": true,
-  "description": "极简书签管理器 - 后端 API（认证 + 书签 CRUD + 标签/关键词筛选）",
+  "description": "linkmark · Express REST API (Node 20 + Express 4 + pg)",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node --test test/*.test.js"
+    "test": "node --test"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
     "express": "^4.21.2",
+    "pg": "^8.13.1",
+    "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
-    "pg": "^8.13.1"
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "pg-mem": "^3.0.5"
+    "pg-mem": "^3.0.3"
   }
 }

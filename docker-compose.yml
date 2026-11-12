@@ -1,0 +1,52 @@
+# linkmark · Docker Compose 编排（运维交付，遵循 ARCHITECTURE.md §7 与 DECISIONS.md §5）
+# 三服务 db / backend / web 统一接入同一 Compose 网络；仅 web 对宿主机暴露端口。
+# 用法：cp .env.example .env 后执行  docker compose up --build
+# 浏览器访问 http://localhost:${WEB_PORT:-8080}
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      # 架构师唯一权威 DDL，仅数据卷首次为空时执行
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - linkmark
+
+  backend:
+    build: ./backend                      # node:20-alpine（后端角色提供 Dockerfile）
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      PORT: "3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    # 不对宿主机暴露，仅 Compose 内网可达
+    networks:
+      - linkmark
+
+  web:
+    build: ./frontend                     # 多阶段：node 构建 dist → nginx:alpine 托管 + /api 反代
+    ports:
+      - "${WEB_PORT:-8080}:80"            # 唯一对外端口
+    depends_on:
+      - backend
+    networks:
+      - linkmark
+
+volumes:
+  db_data:                               # 命名卷持久化
+
+networks:
+  linkmark:
